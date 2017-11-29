@@ -18,6 +18,8 @@ public class MessagesChat extends AppCompatActivity{
     private List<TextMessage> textMessages;
     private MessagesAdapter adapter;
 
+    private int temp;///////////////////////////////////////////////////////////////////////////////
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,14 +32,29 @@ public class MessagesChat extends AppCompatActivity{
         LinearLayoutManager lm = new LinearLayoutManager(this);
         rv.setLayoutManager(lm);
 
-    for (int i=0;i<10;i++){
+
+
+        temp=1;/////////////////////////////////////////////////////////////////////////////////////
+    for (int i=0;i<20;i++){
             TextMessage textMessageAux = new TextMessage();
             textMessageAux.setId("i");
-            textMessageAux.setMessage("hola "+i);
-            textMessageAux.setMessageType(1);
+            textMessageAux.setMessage("receptor "+i);
+            textMessageAux.setMessageType(temp);
             textMessageAux.setTimeMessage("4:2"+i);
             textMessages.add(textMessageAux);
+            if (temp == 1){/////////////////////////////////////////////////////////////////////////
+                temp=2;
+            } else if (temp == 2){
+                temp=1;
+            }
         }
+        /*for (int i=0;i<10;i++){
+            TextMessage textMessageAux = new TextMessage();
+            textMessageAux.setId("i");
+            textMessageAux.setMessage("receptor "+i);
+            textMessageAux.setMessageType(2);
+            textMessageAux.setTimeMessage("4:2"+i);
+            textMessages.add(textMessageAux);}*/
 
         adapter = new MessagesAdapter(textMessages);
         rv.setAdapter(adapter);
