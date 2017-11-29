@@ -1,8 +1,8 @@
 package progra3.datos.packettecapp;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,12 +16,11 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Login extends AppCompatActivity {
+public class Register extends AppCompatActivity {
 
     private EditText ETUser;
     private EditText ETPassword;
     private Button BTRegister;
-    private Button BTLogIn;
 
     private RequestQueue mRequest;
     private VolleyRP Volley;
@@ -32,34 +31,20 @@ public class Login extends AppCompatActivity {
     private String PASSWORD = "";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        Volley = VolleyRP.getInstance(this);
-        mRequest = Volley.getRequestQueue();
+        setContentView(R.layout.activity_register);
 
         //Texto ingresado
-        ETUser = (EditText) findViewById(R.id.ETUser);
-        ETPassword = (EditText) findViewById(R.id.ETPassword);
+        ETUser = (EditText) findViewById(R.id.ETUserRegister);
+        ETPassword = (EditText) findViewById(R.id.ETPasswordRegister);
 
         //Boton de ingreso
-        BTLogIn = (Button) findViewById(R.id.BTLogIn);
         BTRegister = (Button) findViewById(R.id.BTRegister);
 
         BTRegister.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {  //Evento del boton "register"
-                //Lamado a nueva actividad para proceder con el registro de nuevo usurio
-                Intent r = new Intent(Login.this, PrincipalStore.class);
-                startActivity(r);
-            }
-        });
-
-        BTLogIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {  //Evento del boton "log in"
-                Toast.makeText(Login.this, "Log in...", Toast.LENGTH_SHORT).show();    //Flag con texto
+            public void onClick(View view) {  //Evento del boton "Register"
                 VerifyData(ETUser.getText().toString().toLowerCase(), ETPassword.getText().toString().toLowerCase());
             }
         });
@@ -68,24 +53,35 @@ public class Login extends AppCompatActivity {
     public void VerifyData(String user, String password){
         USER = user;
         PASSWORD = password;
-        RequestJson(IP+user);
+        //RequestJson(IP+user); cambia porque debe enviar informacion no recibir
     }
 
-    public void RequestJson(String url){
+
+
+
+    /* Se debe:
+    * Enviar informacion
+    * Hacer que verifique si ya existe una cuenta con ese user en el servidor
+    * Enviar error si ya existe (puede ser en un toast o un en texview), aceptar y enviar a la siguiente "actividad" si no existe
+     */
+
+
+
+    public void RequestJson(String url){ //buscar hacer llamado a enviar informacion
         JsonObjectRequest Request = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject data) {
-                VerifyLogin(data);
+                VerifyRegister(data);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(Login.this, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Register.this, "Error", Toast.LENGTH_SHORT).show();
             }
         });
         VolleyRP.addToQueue(Request, mRequest, this, Volley);
     }
-    public void VerifyLogin(JSONObject data){
+    public void VerifyRegister(JSONObject data){
         //Controlar el Json
         //el del video lo usa con formato: {"resultado":"CC","datos":{"id":"USER","Password":"PASSWORD"}}
         try {
@@ -110,29 +106,3 @@ public class Login extends AppCompatActivity {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

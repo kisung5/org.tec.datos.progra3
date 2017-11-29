@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
@@ -11,7 +13,6 @@
     tools:context="progra3.datos.packettecapp.Login">
 
     <LinearLayout
-        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -23,7 +24,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_action_user"
             android:drawableRight="@drawable/ic_action_users"
-            android:hint="User" />
+            android:hint="Username" />
 
         <EditText
             android:id="@+id/ETPassword"
@@ -32,15 +33,34 @@
             android:drawableLeft="@drawable/ic_action_key"
             android:drawableRight="@drawable/ic_action_lock_open"
             android:hint="Password"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword" />
+
+        <RelativeLayout
+        android:id="@+id/buttonPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/BTRegister"
+            android:layout_width="147dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:hint="Create account"
+            android:textColorHint="#bb000000"
+            android:theme="@style/BotonClick" />
 
         <Button
             android:id="@+id/BTLogIn"
-            android:layout_width="wrap_content"
+            android:layout_width="147dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="right"
             android:hint="Log in"
             android:textColorHint="#bb000000"
             android:theme="@style/BotonClick" />
+
+        </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>
