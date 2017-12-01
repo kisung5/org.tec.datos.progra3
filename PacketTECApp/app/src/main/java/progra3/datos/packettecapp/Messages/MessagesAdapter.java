@@ -37,22 +37,28 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     public void onBindViewHolder(MessagesViewHolder holder, int position) {
         RelativeLayout.LayoutParams rl = (RelativeLayout.LayoutParams) holder.cardView.getLayoutParams();
         FrameLayout.LayoutParams fl = (FrameLayout.LayoutParams) holder.MessageBG.getLayoutParams();
+        //LinearLayout.LayoutParams llMessage = (LinearLayout.LayoutParams) holder.TvMessage.getLayoutParams(); //parametro a utilizar para mover texto
+        LinearLayout.LayoutParams llTime = (LinearLayout.LayoutParams) holder.TvTime.getLayoutParams();
 
         if (textMessages.get(position).getMessageType()==1){ //EMISOR
             holder.MessageBG.setBackgroundResource(R.drawable.in_message_bg);//cambio de color y direccion de nube de mensaje
             rl.addRule(RelativeLayout.ALIGN_PARENT_LEFT,0);
             rl.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            //llMessage.gravity = Gravity.RIGHT;        //Para mover texto
+            llTime.gravity = Gravity.RIGHT;
             fl.gravity = Gravity.RIGHT;
         } else if (textMessages.get(position).getMessageType()==2) { //RECEPTOR
             holder.MessageBG.setBackgroundResource(R.drawable.out_message_bg);//cambio de color y direccion de nube de mensaje
             rl.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,0);
             rl.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            llTime.gravity = Gravity.RIGHT;
             fl.gravity = Gravity.LEFT;
         }
 
         holder.cardView.setLayoutParams(rl);
         holder.MessageBG.setLayoutParams(fl);
-
+        //holder.TvMessage.setLayoutParams(llMessage); //Para activar movimiento de texto
+        holder.TvTime.setLayoutParams(llTime);
         holder.TvMessage.setText(textMessages.get(position).getMessage());
         holder.TvTime.setText(textMessages.get(position).getTimeMessage());
     }

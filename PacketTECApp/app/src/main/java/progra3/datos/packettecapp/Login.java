@@ -43,7 +43,7 @@ public class Login extends AppCompatActivity {
         ETUser = (EditText) findViewById(R.id.ETUser);
         ETPassword = (EditText) findViewById(R.id.ETPassword);
 
-        //Boton de ingreso
+        //Boton de ingreso y registro
         BTLogIn = (Button) findViewById(R.id.BTLogIn);
         BTRegister = (Button) findViewById(R.id.BTRegister);
 
@@ -51,7 +51,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {  //Evento del boton "register"
                 //Lamado a nueva actividad para proceder con el registro de nuevo usurio
-                Intent r = new Intent(Login.this, PrincipalStore.class);
+                Intent r = new Intent(Login.this, Register.class);
                 startActivity(r);
             }
         });
@@ -68,6 +68,10 @@ public class Login extends AppCompatActivity {
     public void VerifyData(String user, String password){
         USER = user;
         PASSWORD = password;
+
+        Intent i = new Intent(this, PrincipalStore.class);  /////// ///borrar cuando se tenga la verificacion de servidor
+        startActivity(i);      ///////////////////////////// //borrar para evitar llamado directo sin verificacion
+
         RequestJson(IP+user);
     }
 

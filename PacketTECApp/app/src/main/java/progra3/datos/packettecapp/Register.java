@@ -18,9 +18,9 @@ import org.json.JSONObject;
 
 public class Register extends AppCompatActivity {
 
-    private EditText ETUser;
-    private EditText ETPassword;
-    private Button BTRegister;
+    private EditText ETUserRegister;
+    private EditText ETPasswordRegister;
+    private Button BTRegisterNew;
 
     private RequestQueue mRequest;
     private VolleyRP Volley;
@@ -31,42 +31,44 @@ public class Register extends AppCompatActivity {
     private String PASSWORD = "";
 
     @Override
-    protected void onCreate( Bundle savedInstanceState ) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
         //Texto ingresado
-        ETUser = (EditText) findViewById(R.id.ETUserRegister);
-        ETPassword = (EditText) findViewById(R.id.ETPasswordRegister);
+        ETUserRegister = (EditText) findViewById(R.id.ETUserRegister);
+        ETPasswordRegister = (EditText) findViewById(R.id.ETPasswordRegister);
 
         //Boton de ingreso
-        BTRegister = (Button) findViewById(R.id.BTRegister);
+        BTRegisterNew = (Button) findViewById(R.id.BTRegisterNew);
 
-        BTRegister.setOnClickListener(new View.OnClickListener() {
+        BTRegisterNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {  //Evento del boton "Register"
-                VerifyData(ETUser.getText().toString().toLowerCase(), ETPassword.getText().toString().toLowerCase());
+                ////////////////////////////////////////llamar a verificacion de "no existencia del user" y luego creacion de cuenta
+                VerifyData(ETUserRegister.getText().toString().toLowerCase(), ETPasswordRegister.getText().toString().toLowerCase());
             }
         });
     }
 
-    public void VerifyData(String user, String password){
+    public void VerifyData(String user, String password) {
+        /////////////////////////////////////se debe verificar la existencia o no del User
         USER = user;
         PASSWORD = password;
-        //RequestJson(IP+user); cambia porque debe enviar informacion no recibir
+        Toast.makeText(this, "The user is: "+USER+", and the password is "+PASSWORD, Toast.LENGTH_SHORT).show();//Flag con texto para test
+        //////////////////RequestJson(IP+user); cambia porque debe enviar informacion no recibir
     }
-
-
 
 
     /* Se debe:
     * Enviar informacion
     * Hacer que verifique si ya existe una cuenta con ese user en el servidor
-    * Enviar error si ya existe (puede ser en un toast o un en texview), aceptar y enviar a la siguiente "actividad" si no existe
+    * Enviar error si ya existe (puede ser en un toast o un en texview),
+    * o aceptar y enviar a la siguiente "actividad" si no existe
      */
 
-
-
+}
+/*                      ////////////////// verificacion de inicio de sesion tal vez aprovechable si no hacerla nueva..............
     public void RequestJson(String url){ //buscar hacer llamado a enviar informacion
         JsonObjectRequest Request = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -105,4 +107,4 @@ public class Register extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-}
+}*/
